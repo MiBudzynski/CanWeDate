@@ -1,0 +1,163 @@
+<object-stream>
+<org.drools.core.audit.WorkingMemoryLog>
+  <version>6.1</version>
+  <events>
+    <org.drools.core.audit.event.ActivationLogEvent>
+      <type>4</type>
+      <activationId>start [0]</activationId>
+      <rule>start</rule>
+      <declarations></declarations>
+      <factHandleIds>0</factHandleIds>
+    </org.drools.core.audit.event.ActivationLogEvent>
+    <org.drools.core.audit.event.ActivationLogEvent>
+      <type>6</type>
+      <activationId>start [0]</activationId>
+      <rule>start</rule>
+      <declarations></declarations>
+      <factHandleIds>0</factHandleIds>
+    </org.drools.core.audit.event.ActivationLogEvent>
+    <org.drools.core.audit.event.ObjectLogEvent>
+      <type>1</type>
+      <factId>1</factId>
+      <objectToString>State( tresc_pytania=What kind of preexisting relation do you have with this person?, opcje_odpowiedzi=[PROFESIONAL, PERSONAL, OTHER], odpowiedz=null )</objectToString>
+    </org.drools.core.audit.event.ObjectLogEvent>
+    <org.drools.core.audit.event.ActivationLogEvent>
+      <type>7</type>
+      <activationId>start [0]</activationId>
+      <rule>start</rule>
+      <declarations></declarations>
+      <factHandleIds>0</factHandleIds>
+    </org.drools.core.audit.event.ActivationLogEvent>
+    <org.drools.core.audit.event.ActivationLogEvent>
+      <type>4</type>
+      <activationId>query [1]</activationId>
+      <rule>query</rule>
+      <declarations>state=State( tresc_pytania=What kind of preexisting relation do you have with this person?, opcje_odpowiedzi=[PROFESIONAL, PERSONAL, OTHER], odpowiedz=null )</declarations>
+      <factHandleIds>1</factHandleIds>
+    </org.drools.core.audit.event.ActivationLogEvent>
+    <org.drools.core.audit.event.ActivationLogEvent>
+      <type>6</type>
+      <activationId>query [1]</activationId>
+      <rule>query</rule>
+      <declarations>state=State( tresc_pytania=What kind of preexisting relation do you have with this person?, opcje_odpowiedzi=[PROFESIONAL, PERSONAL, OTHER], odpowiedz=null )</declarations>
+      <factHandleIds>1</factHandleIds>
+    </org.drools.core.audit.event.ActivationLogEvent>
+    <org.drools.core.audit.event.ObjectLogEvent>
+      <type>2</type>
+      <factId>1</factId>
+      <objectToString>State( tresc_pytania=What kind of preexisting relation do you have with this person?, opcje_odpowiedzi=[PROFESIONAL, PERSONAL, OTHER], odpowiedz=PERSONAL )</objectToString>
+    </org.drools.core.audit.event.ObjectLogEvent>
+    <org.drools.core.audit.event.ActivationLogEvent>
+      <type>7</type>
+      <activationId>query [1]</activationId>
+      <rule>query</rule>
+      <declarations>state=State( tresc_pytania=What kind of preexisting relation do you have with this person?, opcje_odpowiedzi=[PROFESIONAL, PERSONAL, OTHER], odpowiedz=PERSONAL )</declarations>
+      <factHandleIds>1</factHandleIds>
+    </org.drools.core.audit.event.ActivationLogEvent>
+    <org.drools.core.audit.event.ActivationLogEvent>
+      <type>4</type>
+      <activationId>What kind of preexisting relation do you have with this person? - PERSONAL [1]</activationId>
+      <rule>What kind of preexisting relation do you have with this person? - PERSONAL</rule>
+      <declarations>decision=State( tresc_pytania=What kind of preexisting relation do you have with this person?, opcje_odpowiedzi=[PROFESIONAL, PERSONAL, OTHER], odpowiedz=PERSONAL )</declarations>
+      <factHandleIds>1</factHandleIds>
+    </org.drools.core.audit.event.ActivationLogEvent>
+    <org.drools.core.audit.event.ActivationLogEvent>
+      <type>6</type>
+      <activationId>What kind of preexisting relation do you have with this person? - PERSONAL [1]</activationId>
+      <rule>What kind of preexisting relation do you have with this person? - PERSONAL</rule>
+      <declarations>decision=State( tresc_pytania=What kind of preexisting relation do you have with this person?, opcje_odpowiedzi=[PROFESIONAL, PERSONAL, OTHER], odpowiedz=PERSONAL )</declarations>
+      <factHandleIds>1</factHandleIds>
+    </org.drools.core.audit.event.ActivationLogEvent>
+    <org.drools.core.audit.event.ObjectLogEvent>
+      <type>2</type>
+      <factId>1</factId>
+      <objectToString>State( tresc_pytania=Are you related?, opcje_odpowiedzi=[Yes, No], odpowiedz=PERSONAL )</objectToString>
+    </org.drools.core.audit.event.ObjectLogEvent>
+    <org.drools.core.audit.event.ActivationLogEvent>
+      <type>7</type>
+      <activationId>What kind of preexisting relation do you have with this person? - PERSONAL [1]</activationId>
+      <rule>What kind of preexisting relation do you have with this person? - PERSONAL</rule>
+      <declarations>decision=State( tresc_pytania=Are you related?, opcje_odpowiedzi=[Yes, No], odpowiedz=PERSONAL )</declarations>
+      <factHandleIds>1</factHandleIds>
+    </org.drools.core.audit.event.ActivationLogEvent>
+    <org.drools.core.audit.event.ActivationLogEvent>
+      <type>4</type>
+      <activationId>query [1]</activationId>
+      <rule>query</rule>
+      <declarations>state=State( tresc_pytania=Are you related?, opcje_odpowiedzi=[Yes, No], odpowiedz=PERSONAL )</declarations>
+      <factHandleIds>1</factHandleIds>
+    </org.drools.core.audit.event.ActivationLogEvent>
+    <org.drools.core.audit.event.ActivationLogEvent>
+      <type>6</type>
+      <activationId>query [1]</activationId>
+      <rule>query</rule>
+      <declarations>state=State( tresc_pytania=Are you related?, opcje_odpowiedzi=[Yes, No], odpowiedz=PERSONAL )</declarations>
+      <factHandleIds>1</factHandleIds>
+    </org.drools.core.audit.event.ActivationLogEvent>
+    <org.drools.core.audit.event.ObjectLogEvent>
+      <type>2</type>
+      <factId>1</factId>
+      <objectToString>State( tresc_pytania=Are you related?, opcje_odpowiedzi=[Yes, No], odpowiedz=No )</objectToString>
+    </org.drools.core.audit.event.ObjectLogEvent>
+    <org.drools.core.audit.event.ActivationLogEvent>
+      <type>7</type>
+      <activationId>query [1]</activationId>
+      <rule>query</rule>
+      <declarations>state=State( tresc_pytania=Are you related?, opcje_odpowiedzi=[Yes, No], odpowiedz=No )</declarations>
+      <factHandleIds>1</factHandleIds>
+    </org.drools.core.audit.event.ActivationLogEvent>
+    <org.drools.core.audit.event.ActivationLogEvent>
+      <type>4</type>
+      <activationId>Are you related? - NO [1]</activationId>
+      <rule>Are you related? - NO</rule>
+      <declarations>decision=State( tresc_pytania=Are you related?, opcje_odpowiedzi=[Yes, No], odpowiedz=No )</declarations>
+      <factHandleIds>1</factHandleIds>
+    </org.drools.core.audit.event.ActivationLogEvent>
+    <org.drools.core.audit.event.ActivationLogEvent>
+      <type>6</type>
+      <activationId>Are you related? - NO [1]</activationId>
+      <rule>Are you related? - NO</rule>
+      <declarations>decision=State( tresc_pytania=Are you related?, opcje_odpowiedzi=[Yes, No], odpowiedz=No )</declarations>
+      <factHandleIds>1</factHandleIds>
+    </org.drools.core.audit.event.ActivationLogEvent>
+    <org.drools.core.audit.event.ObjectLogEvent>
+      <type>2</type>
+      <factId>1</factId>
+      <objectToString>State( tresc_pytania=So What kind of personal relation do you have with this person?, opcje_odpowiedzi=[MISSED_CONNECTION, BEST_FRIENDS_SIBLING, DEALER, ROOMMATE, SOULMATE, CELLMATE, DUNGEON_MASTER, CRUSH], odpowiedz=No )</objectToString>
+    </org.drools.core.audit.event.ObjectLogEvent>
+    <org.drools.core.audit.event.ActivationLogEvent>
+      <type>7</type>
+      <activationId>Are you related? - NO [1]</activationId>
+      <rule>Are you related? - NO</rule>
+      <declarations>decision=State( tresc_pytania=So What kind of personal relation do you have with this person?, opcje_odpowiedzi=[MISSED_CONNECTION, BEST_FRIENDS_SIBLING, DEALER, ROOMMATE, SOULMATE, CELLMATE, DUNGEON_MASTER, CRUSH], odpowiedz=No )</declarations>
+      <factHandleIds>1</factHandleIds>
+    </org.drools.core.audit.event.ActivationLogEvent>
+    <org.drools.core.audit.event.ActivationLogEvent>
+      <type>4</type>
+      <activationId>query [1]</activationId>
+      <rule>query</rule>
+      <declarations>state=State( tresc_pytania=So What kind of personal relation do you have with this person?, opcje_odpowiedzi=[MISSED_CONNECTION, BEST_FRIENDS_SIBLING, DEALER, ROOMMATE, SOULMATE, CELLMATE, DUNGEON_MASTER, CRUSH], odpowiedz=No )</declarations>
+      <factHandleIds>1</factHandleIds>
+    </org.drools.core.audit.event.ActivationLogEvent>
+    <org.drools.core.audit.event.ActivationLogEvent>
+      <type>6</type>
+      <activationId>query [1]</activationId>
+      <rule>query</rule>
+      <declarations>state=State( tresc_pytania=So What kind of personal relation do you have with this person?, opcje_odpowiedzi=[MISSED_CONNECTION, BEST_FRIENDS_SIBLING, DEALER, ROOMMATE, SOULMATE, CELLMATE, DUNGEON_MASTER, CRUSH], odpowiedz=No )</declarations>
+      <factHandleIds>1</factHandleIds>
+    </org.drools.core.audit.event.ActivationLogEvent>
+    <org.drools.core.audit.event.ObjectLogEvent>
+      <type>2</type>
+      <factId>1</factId>
+      <objectToString>State( tresc_pytania=So What kind of personal relation do you have with this person?, opcje_odpowiedzi=[MISSED_CONNECTION, BEST_FRIENDS_SIBLING, DEALER, ROOMMATE, SOULMATE, CELLMATE, DUNGEON_MASTER, CRUSH], odpowiedz=SOULMATE )</objectToString>
+    </org.drools.core.audit.event.ObjectLogEvent>
+    <org.drools.core.audit.event.ActivationLogEvent>
+      <type>7</type>
+      <activationId>query [1]</activationId>
+      <rule>query</rule>
+      <declarations>state=State( tresc_pytania=So What kind of personal relation do you have with this person?, opcje_odpowiedzi=[MISSED_CONNECTION, BEST_FRIENDS_SIBLING, DEALER, ROOMMATE, SOULMATE, CELLMATE, DUNGEON_MASTER, CRUSH], odpowiedz=SOULMATE )</declarations>
+      <factHandleIds>1</factHandleIds>
+    </org.drools.core.audit.event.ActivationLogEvent>
+  </events>
+</org.drools.core.audit.WorkingMemoryLog>
+</object-stream>

@@ -1,0 +1,70 @@
+package com.sample.rules;
+
+import com.sample.GUI;
+
+declare State
+    tresc_pytania : String
+    opcje_odpowiedzi : String[]
+    odpowiedz : String
+end
+
+rule "query"
+    when
+        state : State(opcje_odpowiedzi != null && opcje_odpowiedzi.length > 0)
+    then
+        GUI gui = new GUI(state.getTresc_pytania(), state.getOpcje_odpowiedzi());
+        gui.waitForAnswer();
+        state.setOdpowiedz(gui.getAnswer());
+        update(state);
+end
+
+rule "start"
+    when
+    then
+        State decision = new State();
+        decision.setTresc_pytania("What kind of preexisting relation do you have with this person?");
+        decision.setOpcje_odpowiedzi(new String[] {"PROFESIONAL", "PERSONAL", "OTHER"});
+        insert(decision);
+end
+
+rule "What kind of preexisting relation do you have with this person? - PROFESIONAL"
+    when
+        decision : State(odpowiedz == "PROFESIONAL",
+                         tresc_pytania == "What kind of preexisting relation do you have with this person?")
+    then
+        decision.setTresc_pytania("What kind of professional relation do you have?");
+        decision.setOpcje_odpowiedzi(new String[] {"PROFESSOR", "STUDENT", "TEACHER", "BOSS", "PHYSICIAN",
+                                                "LANDLORD", "SOCIAL_WORKER", "THERAPIST", "STALKER", "COSTAR"});
+        update(decision);
+end
+
+rule "What kind of preexisting relation do you have with this person? - PERSONAL"
+    when
+        decision : State(odpowiedz == "PERSONAL",
+                         tresc_pytania == "What kind of preexisting relation do you have with this person?")
+    then
+        decision.setTresc_pytania("Are you related?");
+        decision.setOpcje_odpowiedzi(new String[] {"Yes", "No"});
+        update(decision);
+end
+
+rule "What kind of preexisting relation do you have with this person? - OTHER"
+    when
+        decision : State(odpowiedz == "OTHER",
+                         tresc_pytania == "What kind of preexisting relation do you have with this person?")
+    then
+        decision.setTresc_pytania("Then what is it?");
+        decision.setOpcje_odpowiedzi(new String[] {"GHOST", "BEST_FRIENDS_EX", "CONSOLE", "PET", "LOVEBOT"});
+        update(decision);
+end
+
+rule "Are you related? - NO"
+    when
+        decision : State(odpowiedz == "No",
+                         tresc_pytania == "Are you related?")
+    then
+        decision.setTresc_pytania("So What kind of personal relation do you have with this person?");
+        decision.setOpcje_odpowiedzi(new String[] {"MISSED_CONNECTION", "BEST_FRIENDS_SIBLING", "DEALER", "ROOMMATE", 
+        										"SOULMATE", "CELLMATE", "DUNGEON_MASTER", "CRUSH"});
+        update(decision);
+end
