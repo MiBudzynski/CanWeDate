@@ -243,5 +243,154 @@ rule "only one - never"
         update(decision);
 end
 
+rule "Costar"
+    when 
+        decision : State(odpowiedz == "COSTAR.png",
+                         tresc_pytania == "What kind of professional relation do you have?")
+    then
+        decision.setTresc_pytania("Are you trying to generate publicity and dispel certain rumors?");
+        decision.setOpcje_odpowiedzi(new String[] {"Yes", "No"});
+        update(decision);
+end
 
+rule "Publicity-yes"
+    when 
+        decision : State(odpowiedz == "Yes",
+                         tresc_pytania == "Are you trying to generate publicity and dispel certain rumors?")
+    then
+        decision.setTresc_pytania("PATISON.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
 
+rule "Publicity-no"
+	when 
+		decision : State(odpowiedz == "No",
+                         tresc_pytania == "Are you trying to generate publicity and dispel certain rumors?")
+    then
+        decision.setTresc_pytania("SEX_TAPE.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+
+rule "PHYSICIAN"
+    when 
+        decision : State(odpowiedz == "PHYSICIAN.png",
+                         tresc_pytania == "What kind of professional relation do you have?")
+    then
+        decision.setTresc_pytania("Is your health at any serious risk?");
+        decision.setOpcje_odpowiedzi(new String[] {"Yes", "No"});
+        update(decision);
+end
+
+rule "Health risk - yes"
+    when 
+        decision : State(odpowiedz == "Yes",
+                         tresc_pytania == "Is your health at any serious risk?")
+    then
+        decision.setTresc_pytania("PROBABLY_BETTER_NOT.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+
+rule "Health risk - no"
+	when 
+		decision : State(odpowiedz == "No",
+                         tresc_pytania == "Is your health at any serious risk?")
+    then
+        decision.setTresc_pytania("HANDSHAKE.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+
+rule "BOSS"
+    when 
+        decision : State(odpowiedz == "BOSS.png",
+                         tresc_pytania == "What kind of professional relation do you have?")
+    then
+        decision.setTresc_pytania("Does your job suck?");
+        decision.setOpcje_odpowiedzi(new String[] {"Yes", "No"});
+        update(decision);
+end
+
+rule "Sucking job - yes"
+    when 
+        decision : State(odpowiedz == "Yes",
+                         tresc_pytania == "Does your job suck?")
+    then
+        decision.setTresc_pytania("KOSC.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+
+rule "Sucking job - no"
+	when 
+		decision : State(odpowiedz == "No",
+                         tresc_pytania == "Does your job suck?")
+    then
+        decision.setTresc_pytania("PROBABLY_BETTER_NOT.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+
+rule "Professor"
+	when
+		decision : State(odpowiedz == "Professor.png",
+                         tresc_pytania == "What kind of professional relation do you have?")
+
+    then
+        decision.setTresc_pytania("KOSC.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+
+rule "Teacher"
+	when
+		decision : State(odpowiedz == "TEACHER.png",
+                         tresc_pytania == "What kind of professional relation do you have?")
+	  then
+        decision.setTresc_pytania("ABSOLUTELY_NO.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+
+rule "Student"
+	when
+		decision : State(odpowiedz == "STUDENT.png",
+                         tresc_pytania == "What kind of professional relation do you have?")
+	  then
+        decision.setTresc_pytania("Where do you teach?");
+        decision.setOpcje_odpowiedzi(new String[] {"College", "Anything below college"});
+        update(decision);
+end
+
+rule "College"
+    when 
+        decision : State(odpowiedz == "College",
+                         tresc_pytania == "Where do you teach?")
+    then
+        decision.setTresc_pytania("Does your job suck?");
+        decision.setOpcje_odpowiedzi(new String[] {"Yes", "No"});
+        update(decision);
+end
+
+rule "Below college"
+	when 
+		decision : State(odpowiedz == "Anything below college",
+                         tresc_pytania == "Where do you teach?")
+    then
+        decision.setTresc_pytania("WHOA. You're talking about having sex with a minor, right?");
+        decision.setOpcje_odpowiedzi(new String[] {"YEAH", "NO, of course not"});
+        update(decision);
+end
+
+rule "Thought crime"
+	when 
+		decision : State(//odpowiedz == "YEAH" ,
+		 tresc_pytania== "WHOA. You're talking about having sex with a minor, right?")
+    then
+        decision.setTresc_pytania("THOUGHT_CRIME.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+		
