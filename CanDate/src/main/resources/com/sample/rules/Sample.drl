@@ -61,7 +61,7 @@ rule "What kind of preexisting relation do you have with this person? - OTHER"
                          tresc_pytania == "What kind of preexisting relation do you have with this person?")
     then
         decision.setTresc_pytania("Then what is it?");
-        decision.setOpcje_odpowiedzi(new String[] {"GHOST", "BEST_FRIENDS_EX", "CONSOLE", "PET", "LOVEBOT"});
+        decision.setOpcje_odpowiedzi(new String[] {"GHOST.png", "BEST_FRIENDS_EX.png", "CONSOLE.png", "PET.png", "LOVEBOT.png"});
         update(decision);
 end
 
@@ -393,4 +393,270 @@ rule "Thought crime"
         decision.setOpcje_odpowiedzi(new String[] {});
         update(decision);
 end
-		
+
+rule "GHOST"
+	when
+		decision : State(odpowiedz == "GHOST.png",
+                         tresc_pytania == "Then what is it?")
+	  then
+        decision.setTresc_pytania("Like Demi Moore/Patrick Swayze movie?");
+        decision.setOpcje_odpowiedzi(new String[] {"Yeah, exactly like that!", "No, it's really nothing like that!"});
+        update(decision);
+end
+
+rule "Patrick swayze movie - yes"
+	when
+		decision : State(odpowiedz == "Yeah, exactly like that!",
+                         tresc_pytania == "Like Demi Moore/Patrick Swayze movie?")
+	  then
+        decision.setTresc_pytania("GHOST_HUGGING.png");
+        decision.setOpcje_odpowiedzi(new String[] {""});
+        update(decision);
+end
+
+rule "Patrick swayze movie - no"
+	when
+		decision : State(odpowiedz == "No, it's really nothing like that!",
+                         tresc_pytania == "Like Demi Moore/Patrick Swayze movie?")
+	  then
+        decision.setTresc_pytania("Would you have dated this person when among living?");
+        decision.setOpcje_odpowiedzi(new String[] {"Yes", "No"});
+        update(decision);
+end
+
+rule "Dating alive - no"
+	when
+		decision : State(odpowiedz == "No",
+                         tresc_pytania == "Would you have dated this person when among living?")
+	  then
+        decision.setTresc_pytania("PROBABLY_BETTER_NOT.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+
+rule "Dating alive - yes"
+	when
+		decision : State(odpowiedz == "Yes",
+                         tresc_pytania == "Would you have dated this person when among living?")
+	  then
+        decision.setTresc_pytania("GHOST_HUGGING.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+	
+
+rule "Best Friends Ex"
+	when
+		decision : State(odpowiedz == "BEST_FRIENDS_EX.png",
+                         tresc_pytania == "Then what is it?")
+	  then
+        decision.setTresc_pytania("How long since they stopped dating?");
+        decision.setOpcje_odpowiedzi(new String[] {"Well, technically they haven't, really...", "Oh, it's been a while"});
+        update(decision);
+end
+
+rule "are they together - yes"
+	when
+		decision : State(odpowiedz == "Well, technically they haven't, really...",
+                         tresc_pytania == "How long since they stopped dating?")
+	  then
+        decision.setTresc_pytania("ABSOLUTELY_NO.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+
+rule "are they together - no"
+	when
+		decision : State(odpowiedz == "Oh, it's been a while",
+                         tresc_pytania == "How long since they stopped dating?")
+	 then
+        decision.setTresc_pytania("Are they still friends? Or enemies?");
+        decision.setOpcje_odpowiedzi(new String[] {"They have sworn to kill each other on sight", "They're friendly enough"});
+        update(decision);
+end
+
+rule "Still friends"
+	when
+		decision : State(odpowiedz == "They're friendly enough",
+                         tresc_pytania == "Are they still friends? Or enemies?")
+	 then
+        decision.setTresc_pytania("BROS_BEFORE_HOS.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+
+rule "ENEMIES"
+	when
+		decision : State(odpowiedz == "They have sworn to kill each other on sight",
+                         tresc_pytania == "Are they still friends? Or enemies?")
+	  then
+        decision.setTresc_pytania("ABSOLUTELY_NO.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+
+rule "Console"
+	when
+		decision : State(odpowiedz == "CONSOLE.png",
+                         tresc_pytania == "Then what is it?")
+	  then
+        decision.setTresc_pytania("How old are you again?");
+        decision.setOpcje_odpowiedzi(new String[] {"I'm over 18", "I'm under 18"});
+        update(decision);
+end
+
+rule "Adult"
+	when
+		decision : State(odpowiedz == "I'm over 18",
+                         tresc_pytania == "How old are you again?")
+	  then
+        decision.setTresc_pytania("Do you want to be allone for ther rest of your life?");
+        decision.setOpcje_odpowiedzi(new String[] {"Yes", "No"});
+        update(decision);
+end
+
+rule "Forever alone"
+	when
+		decision : State(odpowiedz == "Yes",
+                         tresc_pytania == "Do you want to be allone for ther rest of your life?")
+	  then
+        decision.setTresc_pytania("GAME_ON.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+
+rule "Not Forever alone "
+	when
+		decision : State(odpowiedz == "No",
+                         tresc_pytania == "Do you want to be allone for ther rest of your life?")
+	  then
+        decision.setTresc_pytania("TAKE_A_SHOWER.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+
+rule "kid"
+	when
+		decision : State(odpowiedz == "I'm under 18",
+                         tresc_pytania == "How old are you again?")
+	   then
+        decision.setTresc_pytania("GAME_ON.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+
+rule "She's more like a pet to me"
+	when
+		decision : State(odpowiedz == "PET.png",
+                         tresc_pytania == "Then what is it?")
+	  then
+        decision.setTresc_pytania("Seriously? You want to date an animal");
+        decision.setOpcje_odpowiedzi(new String[] {"NO", "YES"});
+        update(decision);
+end
+
+rule "She's more like a pet to me - no"
+	when
+		decision : State(odpowiedz == "NO",
+                         tresc_pytania == "Seriously? You want to date an animal")
+	  then
+        decision.setTresc_pytania("Ok, well, not \"date\" per se");
+        decision.setOpcje_odpowiedzi(new String[] {""});
+        update(decision);
+end
+
+rule "Not a date per se"
+	when
+		decision : State(odpowiedz == "",
+                         tresc_pytania == "Ok, well, not \"date\" per se")
+	  then
+        decision.setTresc_pytania("ABSOLUTELY_NO.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+
+rule "She's more like a pet to me - yes"
+	when
+		decision : State(odpowiedz == "YES",
+                         tresc_pytania == "Seriously? You want to date an animal")
+	  then
+        decision.setTresc_pytania("Are you a farmer?");
+        decision.setOpcje_odpowiedzi(new String[] {"NO", "YES"});
+        update(decision);
+end
+
+
+rule "Farmer"
+	when
+		decision : State(odpowiedz == "YES",
+                         tresc_pytania == "Are you a farmer?")
+	  then
+        decision.setTresc_pytania("DOWNLOW.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+
+
+rule "Not a Farmer"
+	when
+		decision : State(odpowiedz == "NO",
+                         tresc_pytania == "Are you a farmer?")
+	  then
+        decision.setTresc_pytania("ABSOLUTELY_NO.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+
+rule "LOVEBOT"
+	when
+		decision : State(odpowiedz == "LOVEBOT.png",
+                         tresc_pytania == "Then what is it?")
+	  then
+        decision.setTresc_pytania("Do you live in Japan?");
+        decision.setOpcje_odpowiedzi(new String[] {"NO", "YES"});
+        update(decision);
+end
+
+
+rule "Japanese"
+	when
+		decision : State(odpowiedz == "YES",
+                         tresc_pytania == "Do you live in Japan?")
+	  then
+        decision.setTresc_pytania("DOWNLOW.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+
+
+rule "Not a Japanese"
+	when
+		decision : State(odpowiedz == "NO",
+                         tresc_pytania == "Do you live in Japan?")
+	  then
+        decision.setTresc_pytania("Will you please move there to make the rest of us feel better?");
+        decision.setOpcje_odpowiedzi(new String[] {"NO", "YES"});
+        update(decision);
+end
+
+rule "Future Japanese"
+	when
+		decision : State(odpowiedz == "YES",
+                         tresc_pytania == "Will you please move there to make the rest of us feel better?")
+	  then
+        decision.setTresc_pytania("DOWNLOW.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+
+
+rule "Not Future Japanese"
+	when
+		decision : State(odpowiedz == "NO",
+                         tresc_pytania == "Will you please move there to make the rest of us feel better?")
+	  then
+        decision.setTresc_pytania("ABSOLUTELY_NO.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+
