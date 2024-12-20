@@ -71,10 +71,185 @@ rule "Are you related? - NO"
                          tresc_pytania == "Are you related?")
     then
         decision.setTresc_pytania("So What kind of personal relation do you have with this person?");
-        decision.setOpcje_odpowiedzi(new String[] {"MISSED_CONNECTION", "BEST_FRIENDS_SIBLING", "DEALER", "ROOMMATE", 
-                                                "SOULMATE", "CELLMATE", "DUNGEON_MASTER", "CRUSH"});
+        decision.setOpcje_odpowiedzi(new String[] {"MISSED_CONNECTION.png", "BEST_FRIENDS_SIBLING.png", "DEALER.png", "ROOMMATE.png", 
+                                                "SOULMATE.png", "CELLMATE.png", "DUNGEON_MASTER.png", "CRUSH.png"});
         update(decision);
 end
+
+rule "Are you related? - YES"
+    when
+        decision : State(odpowiedz == "Yes",
+                         tresc_pytania == "Are you related?")
+    then
+        decision.setTresc_pytania("By blood?");
+        decision.setOpcje_odpowiedzi(new String[] {"Yes", "No"});
+        update(decision);
+end
+
+rule "By blood? - YES"
+    when
+        decision : State(odpowiedz == "Yes",
+                         tresc_pytania == "By blood?")
+    then
+        decision.setTresc_pytania("Close or far?");
+        decision.setOpcje_odpowiedzi(new String[] {"It's my brother/sister", "It's my second cousin"});
+        update(decision);
+end
+
+rule "Close or far? - brother/siste"
+    when
+        decision : State(odpowiedz == "It's my brother/sister",
+                         tresc_pytania == "Close or far?")
+    then
+        decision.setTresc_pytania("ABSOLUTELY_NO.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+
+rule "Close or far? - second cousin"
+    when
+        decision : State(odpowiedz == "It's my second cousin",
+                         tresc_pytania == "Close or far?")
+    then
+        decision.setTresc_pytania("Are you really in love or just desperate?");
+        decision.setOpcje_odpowiedzi("God, I am so desperate", "No, It's really love I'm sure");
+        update(decision);
+end
+
+rule "Are you really in love or just desperate? - God, I am so desperate"
+    when
+        decision : State(odpowiedz == "God, I am so desperate",
+                         tresc_pytania == "Are you really in love or just desperate?")
+    then
+        decision.setTresc_pytania("Hang_in_there.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+
+rule "Are you really in love or just desperate? - No, It's really love I'm sure"
+    when
+        decision : State(odpowiedz == "No, It's really love I'm sure",
+                         tresc_pytania == "Are you really in love or just desperate?")
+    then
+        decision.setTresc_pytania("Do you live in a sparsely populated area? Or the South?");
+        decision.setOpcje_odpowiedzi("Yes", "No");
+        update(decision);
+end
+
+rule "Do you live in a sparsely populated area? Or the South? - No"
+    when
+        decision : State(odpowiedz == "No",
+                         tresc_pytania == "Do you live in a sparsely populated area? Or the South?")
+    then
+        decision.setTresc_pytania("Hang_in_there.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+
+rule "Do you live in a sparsely populated area? Or the South? - No"
+    when
+        decision : State(odpowiedz == "No",
+                         tresc_pytania == "Do you live in a sparsely populated area? Or the South?")
+    then
+        decision.setTresc_pytania("DOWNLOW.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+
+rule "By blood? - NO"
+    when
+        decision : State(odpowiedz == "No",
+                         tresc_pytania == "By blood?")
+    then
+        decision.setTresc_pytania("Close or far?");
+        decision.setOpcje_odpowiedzi(new String[] {"Brothers_wifes_cousin.png", "Step.png"});
+        update(decision);
+end
+
+rule "Close or far? - Brothers_wifes_cousin"
+    when
+        decision : State(odpowiedz == "Brothers_wifes_cousin.png",
+                         tresc_pytania == "Close or far?")
+    then
+        decision.setTresc_pytania("Make_it.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+
+rule "Close or far? - Step.png"
+    when
+        decision : State(odpowiedz == "Step.png",
+                         tresc_pytania == "Close or far?")
+    then
+        decision.setTresc_pytania("Are the parents still maried?");
+        decision.setOpcje_odpowiedzi(new String[] {"Yes","No"});
+        update(decision);
+end
+
+rule "Are the parents still maried? - no"
+    when
+        decision : State(odpowiedz == "No",
+                         tresc_pytania == "Are the parents still maried?")
+    then
+        decision.setTresc_pytania("Did you grow up together, like from childhood?");
+        decision.setOpcje_odpowiedzi(new String[] {"Yes","No"});
+        update(decision);
+end
+
+rule "Did you grow up together, like from childhood? - no"
+    when
+        decision : State(odpowiedz == "No",
+                         tresc_pytania == "Did you grow up together, like from childhood?")
+    then
+        decision.setTresc_pytania("DOWNLOW.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+
+rule "Did you grow up together, like from childhood? - yes"
+    when
+        decision : State(odpowiedz == "Yes",
+                         tresc_pytania == "Did you grow up together, like from childhood?")
+    then
+        decision.setTresc_pytania("ABSOLUTELY_NO.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+
+rule "Are the parents still maried? - Yes"
+    when
+        decision : State(odpowiedz == "Yes",
+                         tresc_pytania == "Are the parents still maried?")
+    then
+        decision.setTresc_pytania("Are you Woody Allen?");
+        decision.setOpcje_odpowiedzi(new String[] {"Yes","No"});
+        update(decision);
+end
+
+rule "Are you Woody Allen? - Yes"
+    when
+        decision : State(odpowiedz == "Yes",
+                         tresc_pytania == "Are you Woody Allen?")
+    then
+        decision.setTresc_pytania("Make_it.png");
+        decision.setOpcje_odpowiedzi(new String[] {"Yes","No"});
+        update(decision);
+end
+
+rule "Are you Woody Allen? - No"
+    when
+        decision : State(odpowiedz == "No",
+                         tresc_pytania == "Are you Woody Allen?")
+    then
+        decision.setTresc_pytania("ABSOLUTELY_NO.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+
+
+
+
+
 
 rule "landlord"
     when 
@@ -659,4 +834,3 @@ rule "Not Future Japanese"
         decision.setOpcje_odpowiedzi(new String[] {});
         update(decision);
 end
-
