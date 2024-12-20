@@ -112,7 +112,7 @@ rule "Close or far? - second cousin"
                          tresc_pytania == "Close or far?")
     then
         decision.setTresc_pytania("Are you really in love or just desperate?");
-        decision.setOpcje_odpowiedzi("God, I am so desperate", "No, It's really love I'm sure");
+        decision.setOpcje_odpowiedzi(new String[] {"God, I am so desperate", "No, It's really love I'm sure"});
         update(decision);
 end
 
@@ -132,11 +132,11 @@ rule "Are you really in love or just desperate? - No, It's really love I'm sure"
                          tresc_pytania == "Are you really in love or just desperate?")
     then
         decision.setTresc_pytania("Do you live in a sparsely populated area? Or the South?");
-        decision.setOpcje_odpowiedzi("Yes", "No");
+        decision.setOpcje_odpowiedzi(new String[] {"Yes", "No"});
         update(decision);
 end
 
-rule "Do you live in a sparsely populated area? Or the South? - No"
+rule "Do you live in a sparsely populated area? Or the South? - NO"
     when
         decision : State(odpowiedz == "No",
                          tresc_pytania == "Do you live in a sparsely populated area? Or the South?")
@@ -146,9 +146,9 @@ rule "Do you live in a sparsely populated area? Or the South? - No"
         update(decision);
 end
 
-rule "Do you live in a sparsely populated area? Or the South? - No"
+rule "Do you live in a sparsely populated area? Or the South? - Yes"
     when
-        decision : State(odpowiedz == "No",
+        decision : State(odpowiedz == "Yes",
                          tresc_pytania == "Do you live in a sparsely populated area? Or the South?")
     then
         decision.setTresc_pytania("DOWNLOW.png");
@@ -426,25 +426,8 @@ rule "MISSED_CONNECTION"
         update(decision);
 end
 
-rule "Are you crazy? - Not at all"
-    when 
-        decision : State(odpowiedz == "Not at all",
-                         tresc_pytania == "Are you crazy?")
-    then
-        decision.setTresc_pytania("BAD_LIAR.png");
-        decision.setOpcje_odpowiedzi(new String[] {});
-        update(decision);
-end
 
-rule "Are you crazy? - A little"
-    when 
-        decision : State(odpowiedz == "A little",
-                         tresc_pytania == "Are you crazy?")
-    then
-        decision.setTresc_pytania("HAPPY-END.png");
-        decision.setOpcje_odpowiedzi(new String[] {});
-        update(decision);
-end
+
 
 rule "landlord"
     when 
