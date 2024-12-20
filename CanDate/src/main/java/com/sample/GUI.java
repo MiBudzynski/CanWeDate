@@ -2,223 +2,172 @@ package com.sample;
 
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JRadioButton;
-import javax.swing.border.Border;
-import javax.swing.BoxLayout;
-import javax.swing.JScrollPane;
-
-
-
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.Toolkit;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-public class GUI extends JFrame implements ActionListener {
+public class GUI extends JFrame {
 
-  private static final long serialVersionUID = 3378774311250822914L;
+    private static final long serialVersionUID = 3378774311250822914L;
 
-  private JButton button;
-  private String[] possibleAnswers;
-  
-  public boolean ready = false;
-  public int n = -1;
-	
-  public ArrayList<JRadioButton> options = new ArrayList<>();
-   
-  public GUI(String question) {
-      super("Can We Date? - Result");
-      
-      /// QUESTION ///
-      
-      JLabel label = new JLabel(question);
-      Font font = new Font("Courier", Font.BOLD,20);
-      label.setFont(font);
-      
-      JPanel contentPanel = new JPanel();
-      Border padding = BorderFactory.createEmptyBorder(10, 10, 10, 10);
-      contentPanel.setBorder(padding);
-      contentPanel.add(label);
-      this.setContentPane(contentPanel);
-      
-      /// if IMAGE ///
-      
-      if (question.startsWith("<")) {
-          question = question.substring(1, question.length()-1);
-          String path = "src/main/resources/imgs/" + question + ".png";
-          this.addImage(path);
-      }
-      
-      pack();
-      
-      this.setDefaultCloseOperation(EXIT_ON_CLOSE);  
-      this.centerWindow();
-      this.setVisible(true);
-  }
-  
-  public GUI(String question, String[] possibleAnswers) {
-	    super("Can We Date? - Question");
+    private JButton continueButton;
+    private String[] answers;
 
-	    this.possibleAnswers = possibleAnswers;
+    public boolean isReady = false;
+    public int selectedIndex = -1;
 
-	    /// QUESTION ///
-	    JPanel panel_Q = new JPanel();
-	    JLabel label = new JLabel(question);
-	    panel_Q.add(label);
+    public ArrayList<JRadioButton> radioButtons = new ArrayList<>();
 
-	    /// LIST ///
-	    JPanel panel_L = new JPanel(new FlowLayout(FlowLayout.LEFT)); // Arrange horizontally
+    public GUI(String question) {
+        super("Can We Date? - Result");
+        initializeFrame();
 
-	    for (String str_option : possibleAnswers) {
-	        if (str_option.endsWith(".png")) {
-	            try {
-	                String resourcePath = "/imgs/" + str_option;
-	                BufferedImage img = ImageIO.read(getClass().getResource(resourcePath));
-	                ImageIcon resizedIcon = resizeImage(img, 100, 100); // Resize images
+        JPanel contentPanel = new JPanel(new BorderLayout());
+        JLabel questionLabel = createLabel(question);
+        contentPanel.add(questionLabel, BorderLayout.CENTER);
 
-	                JRadioButton radioButton = new JRadioButton(" "); // Add placeholder text
-	                radioButton.setIcon(resizedIcon);
-	                radioButton.setPreferredSize(new Dimension(120, 120)); // Ensure consistent size
-	                radioButton.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        if (isImagePath(question)) {
+            addImageToPanel(contentPanel, extractImagePath(question));
+        }
 
-	                options.add(radioButton);
-	            } catch (IOException | NullPointerException e) {
-	                e.printStackTrace();
-	                options.add(new JRadioButton("[Image not found]"));
-	            }
-	        } else {
-	            options.add(new JRadioButton(str_option));
-	        }
-	    }
+        this.add(contentPanel);
+        finalizeFrame();
+    }
 
-	    ButtonGroup group = new ButtonGroup();
-	    for (JRadioButton option : options) {
-	        group.add(option);
-	        panel_L.add(option);
-	    }
+    public GUI(String question, String[] answers) {
+        super("Can We Date? - Question");
+        initializeFrame();
 
-	    /// CONTINUE ///
-	    JPanel panel_B = new JPanel();
-	    button = new JButton("Continue");
-	    button.addActionListener(this);
-	    panel_B.add(button);
-	    JScrollPane scrollPane = new JScrollPane(panel_L, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-	    this.add(scrollPane, BorderLayout.CENTER);
+        this.answers = answers;
 
-	    /// REGISTER ///
-	    this.setLayout(new BorderLayout()); // Use BorderLayout for main layout
-	    this.add(panel_Q, BorderLayout.PAGE_START);
-	    this.add(panel_L, BorderLayout.CENTER);
-	    this.add(panel_B, BorderLayout.PAGE_END);
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.add(createLabel(question), BorderLayout.NORTH);
 
-	    pack(); // Adjust layout to fit components
-	    this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-	    this.centerWindow();
-	    this.setVisible(true);
-	}
-  public GUI(String picturePath,int J) {
-      super("Can We Date? - End State");
+        JPanel optionsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        ButtonGroup buttonGroup = new ButtonGroup();
 
-      this.setLayout(new BorderLayout());
+        for (String answer : answers) {
+            JRadioButton button;
+            if (answer.endsWith(".png")) {
+                button = createImageRadioButton(answer);
+            } else {
+                button = new JRadioButton(answer);
+            }
+            radioButtons.add(button);
+            buttonGroup.add(button);
+            optionsPanel.add(button);
+        }
 
-      /// IMAGE ///
-      try {
-          String resourcePath = "/imgs/" + picturePath;
-          BufferedImage img = ImageIO.read(getClass().getResource(resourcePath));
-          ImageIcon resizedIcon = resizeImage(img, 400, 400); // Resize for end state
+        JScrollPane scrollPane = new JScrollPane(optionsPanel, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        mainPanel.add(scrollPane, BorderLayout.CENTER);
 
-          JLabel imageLabel = new JLabel(resizedIcon);
-          this.add(imageLabel, BorderLayout.CENTER);
-      } catch (IOException | NullPointerException e) {
-          e.printStackTrace();
-          JLabel errorLabel = new JLabel("[Image not found]");
-          this.add(errorLabel, BorderLayout.CENTER);
-      }
+        continueButton = new JButton("Continue");
+        continueButton.addActionListener(this::handleContinue);
+        mainPanel.add(continueButton, BorderLayout.SOUTH);
 
-      /// CLOSE BUTTON ///
-      JPanel panel_B = new JPanel();
-      JButton closeButton = new JButton("Close");
-      closeButton.addActionListener(e -> System.exit(0)); // Close the application
-      panel_B.add(closeButton);
-      this.add(panel_B, BorderLayout.PAGE_END);
+        this.add(mainPanel);
+        finalizeFrame();
+    }
 
-      pack(); // Adjust layout to fit components
-      this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-      this.centerWindow();
-      this.setVisible(true);
-  }
+    public GUI(String imagePath, int unusedParameter) {
+        super("Can We Date? - End State");
+        initializeFrame();
 
-  
-  public void addImage(String path) {
-      try {
-          BufferedImage wPic = ImageIO.read(new File(path));
-          JLabel wIcon = new JLabel(new ImageIcon(wPic));
-          this.add(wIcon);
-      } catch (IOException e) {
-          e.printStackTrace();
-      }
-  }
-  
-  public void centerWindow() {
-      Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-      int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
-      int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
-      this.setLocation(x, y);
-  }
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        JLabel imageLabel = createImageLabel(imagePath);
+        mainPanel.add(imageLabel, BorderLayout.CENTER);
 
-  public void waitForAnswer() {
-      try {
-          while (!this.ready) { TimeUnit.MILLISECONDS.sleep(25); }
-      } catch (InterruptedException e) {
-          e.printStackTrace();
-      }
-  }
-  
-  public String getAnswer() {
-      if(this.n >= 0) {
-          System.out.println(this.possibleAnswers[this.n]);
-          return this.possibleAnswers[this.n];
-      }
-      return this.possibleAnswers[0]; //default answer
-  }
-  
-  public void actionPerformed(ActionEvent e) {
-      System.out.println(e.getSource());
-      if (e.getSource() == button) {
-          System.out.println("[GUI] clicked!");
-          for (int counter = 0; counter < options.size(); counter++) {               
-              JRadioButton current = options.get(counter);
-              if (current.isSelected()) {
-                  this.n = counter;
-                  break;
-              }
-          }   
-          this.ready = true;
-          this.dispose();
-      }
-  }
-  private ImageIcon resizeImage(BufferedImage image, int width, int height) {
-	    Image scaledImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-	    return new ImageIcon(scaledImage);
-	}
+        JButton closeButton = new JButton("Close");
+        closeButton.addActionListener(e -> System.exit(0));
+        mainPanel.add(closeButton, BorderLayout.SOUTH);
 
+        this.add(mainPanel);
+        finalizeFrame();
+    }
 
+    private void initializeFrame() {
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setLayout(new BorderLayout());
+    }
+
+    private void finalizeFrame() {
+        this.pack();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+    }
+
+    private JLabel createLabel(String text) {
+        JLabel label = new JLabel(text);
+        label.setFont(new Font("Courier", Font.BOLD, 20));
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        return label;
+    }
+
+    private boolean isImagePath(String text) {
+        return text.startsWith("<") && text.endsWith(">");
+    }
+
+    private String extractImagePath(String text) {
+        return text.substring(1, text.length() - 1);
+    }
+
+    private void addImageToPanel(JPanel panel, String imagePath) {
+        JLabel imageLabel = createImageLabel("src/main/resources/imgs/" + imagePath + ".png");
+        panel.add(imageLabel, BorderLayout.SOUTH);
+    }
+
+    private JLabel createImageLabel(String imagePath) {
+        try {
+            BufferedImage image = ImageIO.read(getClass().getResource("/imgs/" + imagePath));
+            ImageIcon scaledIcon = new ImageIcon(image.getScaledInstance(400, 400, Image.SCALE_SMOOTH));
+            return new JLabel(scaledIcon);
+        } catch (IOException | NullPointerException e) {
+            e.printStackTrace();
+            return new JLabel("[Image not found]");
+        }
+    }
+
+    private JRadioButton createImageRadioButton(String imagePath) {
+        try {
+            BufferedImage image = ImageIO.read(getClass().getResource("/imgs/" + imagePath));
+            ImageIcon scaledIcon = new ImageIcon(image.getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+            JRadioButton radioButton = new JRadioButton();
+            radioButton.setIcon(scaledIcon);
+            radioButton.setPreferredSize(new Dimension(120, 120));
+            return radioButton;
+        } catch (IOException | NullPointerException e) {
+            e.printStackTrace();
+            return new JRadioButton("[Image not found]");
+        }
+    }
+
+    private void handleContinue(ActionEvent event) {
+        for (int i = 0; i < radioButtons.size(); i++) {
+            if (radioButtons.get(i).isSelected()) {
+                selectedIndex = i;
+                break;
+            }
+        }
+        isReady = true;
+        this.dispose();
+    }
+
+    public void waitForAnswer() {
+        try {
+            while (!isReady) {
+                TimeUnit.MILLISECONDS.sleep(25);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getAnswer() {
+        return selectedIndex >= 0 ? answers[selectedIndex] : answers[0];
+    }
 }
