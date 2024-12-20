@@ -246,10 +246,205 @@ rule "Are you Woody Allen? - No"
         update(decision);
 end
 
+rule "Highshool crush"
+    when 
+        decision : State(odpowiedz == "CRUSH.png",
+                         tresc_pytania == "So What kind of personal relation do you have with this person?")
+    then
+        decision.setTresc_pytania("Disgust.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
 
+rule "DUNGEON_MASTER"
+    when 
+        decision : State(odpowiedz == "DUNGEON_MASTER.png",
+                         tresc_pytania == "So What kind of personal relation do you have with this person?")
+    then
+        decision.setTresc_pytania("sex_with_dm.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
 
+rule "CELLMATE"
+    when 
+        decision : State(odpowiedz == "CELLMATE.png",
+                         tresc_pytania == "So What kind of personal relation do you have with this person?")
+    then
+        decision.setTresc_pytania("Do you really have a choise in a matter?");
+        decision.setOpcje_odpowiedzi(new String[] {"Yes", "No"});
+        update(decision);
+end
 
+rule "Do you really have a choise in a matter? - No"
+    when 
+        decision : State(odpowiedz == "No",
+                         tresc_pytania == "Do you really have a choise in a matter?")
+    then
+        decision.setTresc_pytania("Obvious.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
 
+rule "Do you really have a choise in a matter? - Yes"
+    when 
+        decision : State(odpowiedz == "Yes",
+                         tresc_pytania == "Do you really have a choise in a matter?")
+    then
+        decision.setTresc_pytania("PROBABLY_BETTER_NOT.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+
+rule "SOULMATE"
+    when 
+        decision : State(odpowiedz == "SOULMATE.png",
+                         tresc_pytania == "So What kind of personal relation do you have with this person?")
+    then
+        decision.setTresc_pytania("Are you done having sex with other people?");
+        decision.setOpcje_odpowiedzi(new String[] {"Yes", "No"});
+        update(decision);
+end
+
+rule "Are you done having sex with other people? - Yes"
+    when 
+        decision : State(odpowiedz == "Yes",
+                         tresc_pytania == "Are you done having sex with other people?")
+    then
+        decision.setTresc_pytania("Obvious.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+
+rule "Are you done having sex with other people? - No"
+    when 
+        decision : State(odpowiedz == "No",
+                         tresc_pytania == "Are you done having sex with other people?")
+    then
+        decision.setTresc_pytania("PROBABLY_BETTER_NOT.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+
+rule "ROOMMATE"
+    when 
+        decision : State(odpowiedz == "ROOMMATE.png",
+                         tresc_pytania == "So What kind of personal relation do you have with this person?")
+    then
+        decision.setTresc_pytania("Do you like drama?");
+        decision.setOpcje_odpowiedzi(new String[] {"Yes", "No"});
+        update(decision);
+end
+
+rule "Do you like drama? - No"
+    when 
+        decision : State(odpowiedz == "No",
+                         tresc_pytania == "Do you like drama?")
+    then
+        decision.setTresc_pytania("PROBABLY_BETTER_NOT.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+
+rule "Do you like drama? - Yes"
+    when 
+        decision : State(odpowiedz == "Yes",
+                         tresc_pytania == "Do you like drama?")
+    then
+        decision.setTresc_pytania("Awesome.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+
+rule "DEALER"
+    when 
+        decision : State(odpowiedz == "DEALER.png",
+                         tresc_pytania == "So What kind of personal relation do you have with this person?")
+    then
+        decision.setTresc_pytania("Do you wanna get high?");
+        decision.setOpcje_odpowiedzi(new String[] {"Yes", "No"});
+        update(decision);
+end
+
+rule "Do you wanna get high? - No"
+    when 
+        decision : State(odpowiedz == "No",
+                         tresc_pytania == "Do you wanna get high?")
+    then
+        decision.setTresc_pytania("PROBABLY_BETTER_NOT.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+
+rule "Do you wanna get high? - Yes"
+    when 
+        decision : State(odpowiedz == "Yes",
+                         tresc_pytania == "Do you wanna get high?")
+    then
+        decision.setTresc_pytania("HAPPY-END.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+
+rule "BEST_FRIENDS_SIBLING"
+    when 
+        decision : State(odpowiedz == "BEST_FRIENDS_SIBLING.png",
+                         tresc_pytania == "So What kind of personal relation do you have with this person?")
+    then
+        decision.setTresc_pytania("Are you crazy?");
+        decision.setOpcje_odpowiedzi(new String[] {"I don't think so", "A little"});
+        update(decision);
+end
+
+rule "Are you crazy? - I don't think so"
+    when 
+        decision : State(odpowiedz == "I don't think so",
+                         tresc_pytania == "Are you crazy?")
+    then
+        decision.setTresc_pytania("BAD_LIAR.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+
+rule "Are you crazy? - A little"
+    when 
+        decision : State(odpowiedz == "A little",
+                         tresc_pytania == "Are you crazy?")
+    then
+        decision.setTresc_pytania("HAPPY-END.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+
+rule "MISSED_CONNECTION"
+    when 
+        decision : State(odpowiedz == "MISSED_CONNECTION.png",
+                         tresc_pytania == "So What kind of personal relation do you have with this person?")
+    then
+        decision.setTresc_pytania("How lonley are you?");
+        decision.setOpcje_odpowiedzi(new String[] {"Not at all", "A little"});
+        update(decision);
+end
+
+rule "Are you crazy? - Not at all"
+    when 
+        decision : State(odpowiedz == "Not at all",
+                         tresc_pytania == "Are you crazy?")
+    then
+        decision.setTresc_pytania("BAD_LIAR.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
+
+rule "Are you crazy? - A little"
+    when 
+        decision : State(odpowiedz == "A little",
+                         tresc_pytania == "Are you crazy?")
+    then
+        decision.setTresc_pytania("HAPPY-END.png");
+        decision.setOpcje_odpowiedzi(new String[] {});
+        update(decision);
+end
 
 rule "landlord"
     when 
